@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black">
+
+    <View
+        android:id="@+id/headerGlow"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_gravity="top"
+        android:background="@drawable/bg_header_glow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:letterSpacing="0.08"
+                android:text="@string/app_name"
+                android:textColor="@color/neon_cyan"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btnHistory"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/history"
+                android:src="@drawable/ic_history"
+                app:tint="@color/neon_cyan" />
+
+            <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/settings"
+                android:src="@drawable/ic_settings"
+                app:tint="@color/neon_magenta" />
+        </LinearLayout>
+
+        <!-- Display -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_display"
+            android:padding="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvExpressionTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="start"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:textColor="@color/text_dim"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="start"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:textColor="@color/text_primary"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="start"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:textColor="@color/neon_green"
+                    android:textSize="22sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- Keypad -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2.15"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/keyAc"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_clear"
+                    android:text="AC"
+                    android:textColor="@color/neon_red" />
+
+                <TextView
+                    android:id="@+id/keyParen"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_func"
+                    android:text="( )"
+                    android:textColor="@color/neon_amber" />
+
+                <TextView
+                    android:id="@+id/keyPercent"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_func"
+                    android:text="%"
+                    android:textColor="@color/neon_amber" />
+
+                <TextView
+                    android:id="@+id/keyDel"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_func"
+                    android:text="DEL"
+                    android:textColor="@color/neon_amber" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/key7" style="@style/CalcKey" android:text="7" />
+                <TextView android:id="@+id/key8" style="@style/CalcKey" android:text="8" />
+                <TextView android:id="@+id/key9" style="@style/CalcKey" android:text="9" />
+                <TextView
+                    android:id="@+id/keyDiv"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_operator"
+                    android:text="÷"
+                    android:textColor="@color/neon_magenta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/key4" style="@style/CalcKey" android:text="4" />
+                <TextView android:id="@+id/key5" style="@style/CalcKey" android:text="5" />
+                <TextView android:id="@+id/key6" style="@style/CalcKey" android:text="6" />
+                <TextView
+                    android:id="@+id/keyMul"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_operator"
+                    android:text="×"
+                    android:textColor="@color/neon_magenta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/key1" style="@style/CalcKey" android:text="1" />
+                <TextView android:id="@+id/key2" style="@style/CalcKey" android:text="2" />
+                <TextView android:id="@+id/key3" style="@style/CalcKey" android:text="3" />
+                <TextView
+                    android:id="@+id/keySub"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_operator"
+                    android:text="−"
+                    android:textColor="@color/neon_magenta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/keySign"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_operator"
+                    android:text="+/−"
+                    android:textColor="@color/neon_magenta"
+                    android:textSize="20sp" />
+
+                <TextView android:id="@+id/key0" style="@style/CalcKey" android:text="0" />
+                <TextView android:id="@+id/keyDot" style="@style/CalcKey" android:text="." />
+                <TextView
+                    android:id="@+id/keyAdd"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_operator"
+                    android:text="+"
+                    android:textColor="@color/neon_magenta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/keyEquals"
+                    style="@style/CalcKey"
+                    android:background="@drawable/bg_key_equals"
+                    android:text="="
+                    android:textColor="@color/black"
+                    android:textSize="26sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

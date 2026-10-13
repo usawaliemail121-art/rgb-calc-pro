@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RGB Calc Pro</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
+    <string name="clear_history">Clear History</string>
+    <string name="no_history">No calculations yet</string>
+    <string name="tap_sound">Tap sound</string>
+    <string name="sound_style">Sound style</string>
+    <string name="sound_mechanical">Mechanical Click</string>
+    <string name="sound_digital">Digital Beep</string>
+    <string name="sound_bubble">Soft Bubble</string>
+    <string name="sound_haptic">Haptic Only</string>
+    <string name="close">Close</string>
+    <string name="divide_by_zero">Cannot divide by 0</string>
+</resources>

@@ -45,15 +45,22 @@ class ExpressionEvaluator {
 
     private fun parseTerm(): Double {
         var value = parseUnary()
-        while (pos < src.length && (src[pos] == '*' || src[pos] == '/')) {
-            val op = src[pos]
-            pos++
-            val rhs = parseUnary()
-            if (op == '/') {
-                if (rhs == 0.0) throw EvalException("Cannot divide by 0")
-                value /= rhs
+        while (pos < src.length) {
+            val c = src[pos]
+            if (c == '*' || c == '/') {
+                pos++
+                val rhs = parseUnary()
+                if (c == '/') {
+                    if (rhs == 0.0) throw EvalException("Cannot divide by 0")
+                    value /= rhs
+                } else {
+                    value *= rhs
+                }
+            } else if (c == '(' || c.isDigit() || c == '.') {
+                // Implicit multiplication: 5(2), (3)(4) and (2)3 all mean "times".
+                value *= parseUnary()
             } else {
-                value *= rhs
+                break
             }
         }
         return value

@@ -9,17 +9,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.LinearInterpolator
-import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.switchmaterial.SwitchMaterial
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,10 +71,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         bindKey(R.id.keyDot) { appendToken(".") }
-        bindKey(R.id.keyAdd) { appendToken("+") }
-        bindKey(R.id.keySub) { appendToken("-") }
-        bindKey(R.id.keyMul) { appendToken("\u00d7") }
-        bindKey(R.id.keyDiv) { appendToken("\u00f7") }
+        bindKey(R.id.keyAdd) { appendOperator("+") }
+        bindKey(R.id.keySub) { appendOperator("-") }
+        bindKey(R.id.keyMul) { appendOperator("\u00d7") }
+        bindKey(R.id.keyDiv) { appendOperator("\u00f7") }
         bindKey(R.id.keyPercent) { appendToken("%") }
 
         bindKey(R.id.keyParen) { appendParen() }
@@ -124,6 +122,46 @@ class MainActivity : AppCompatActivity() {
             }
         }
         input.append(token)
+        refreshDisplay()
+    }
+
+    private fun isOperatorChar(c: Char): Boolean =
+        c == '+' || c == '-' || c == '\u00d7' || c == '\u00f7'
+
+    /**
+     * Appends an operator without letting the user build nonsense such as
+     * "5++2" or "5\u00d7\u00f72". A new operator replaces a trailing one, except
+     * that a minus is allowed after \u00d7 or \u00f7 so a negative number can be typed.
+     */
+    private fun appendOperator(op: String) {
+        if (input.isEmpty()) {
+            if (op == "-") input.append(op)
+            refreshDisplay()
+            return
+        }
+        val last = input.last()
+        if (last == '(') {
+            if (op == "-") input.append(op)
+            refreshDisplay()
+            return
+        }
+        if (last == '.') {
+            // "5." followed by an operator becomes "5+", never "5.+".
+            input.setLength(input.length - 1)
+            input.append(op)
+            refreshDisplay()
+            return
+        }
+        if (isOperatorChar(last)) {
+            if (op == "-" && (last == '\u00d7' || last == '\u00f7')) {
+                input.append(op)
+            } else {
+                input.setCharAt(input.length - 1, op[0])
+            }
+            refreshDisplay()
+            return
+        }
+        input.append(op)
         refreshDisplay()
     }
 
@@ -265,29 +303,24 @@ class MainActivity : AppCompatActivity() {
     private fun openHistory() {
         val dialog = BottomSheetDialog(this)
         val sheet = LayoutInflater.from(this).inflate(R.layout.sheet_history, null)
-        val container = sheet.findViewById<LinearLayout>(R.id.historyContainer)!!
+        val recycler = sheet.findViewById<RecyclerView>(R.id.historyRecycler)!!
         val empty = sheet.findViewById<TextView>(R.id.tvEmptyHistory)!!
 
+        val adapter = HistoryAdapter(mutableListOf()) { item ->
+            soundManager.play(sheet)
+            input.setLength(0)
+            input.append(item.result)
+            tvExpressionTop.text = item.expression + " ="
+            refreshDisplay()
+            dialog.dismiss()
+        }
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
+
         fun render() {
-            container.removeAllViews()
             val items = historyManager.getAll()
+            adapter.setItems(items)
             empty.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
-            val formatter = SimpleDateFormat("dd MMM, hh:mm a", Locale.getDefault())
-            for (item in items) {
-                val row = LayoutInflater.from(this).inflate(R.layout.item_history, container, false)
-                row.findViewById<TextView>(R.id.itemExpression).text = item.expression
-                row.findViewById<TextView>(R.id.itemResult).text = "= " + item.result
-                row.findViewById<TextView>(R.id.itemTime).text = formatter.format(Date(item.timestamp))
-                row.setOnClickListener {
-                    soundManager.play(it)
-                    input.setLength(0)
-                    input.append(item.result)
-                    tvExpressionTop.text = item.expression + " ="
-                    refreshDisplay()
-                    dialog.dismiss()
-                }
-                container.addView(row)
-            }
         }
 
         sheet.findViewById<View>(R.id.btnClearHistory).setOnClickListener {

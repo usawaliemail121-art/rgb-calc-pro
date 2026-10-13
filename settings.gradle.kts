@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RGB Calc Pro"
+rootProject.name = "NeonCalc"
 include(":app")

@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.utilitynest.rgbcalcpro"
-    compileSdk = 35
+    namespace = "com.utilitynest.neoncalc"
+    compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.utilitynest.rgbcalcpro"
+        applicationId = "com.utilitynest.neoncalc"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 2
-        versionName = "1.1"
+        targetSdk = 36
+        versionCode = 3
+        versionName = "1.2"
         vectorDrawables { useSupportLibrary = true }
     }
 

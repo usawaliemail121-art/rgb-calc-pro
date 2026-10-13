@@ -1,4 +1,4 @@
-package com.utilitynest.rgbcalcpro
+package com.utilitynest.neoncalc
 
 import java.util.Locale
 import kotlin.math.abs

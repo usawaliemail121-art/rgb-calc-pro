@@ -1,4 +1,4 @@
-# RGB Calc Pro
+# NeonCalc
 
 A neon cyberpunk calculator for Android, built with Kotlin and standard XML
 layouts. Published under the **UtilityNest** developer account.
@@ -22,7 +22,7 @@ The app is built automatically by GitHub Actions on every push (see
 ### How to download the build
 
 1. Open the **Actions** tab of this repository.
-2. Click the newest green run named *Build RGB Calc Pro*.
+2. Click the newest green run named *Build NeonCalc*.
 3. Scroll to **Artifacts** and download `rgb-calc-pro-release-aab`.
 
 ## Signing

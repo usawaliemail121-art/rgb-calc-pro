@@ -1,4 +1,4 @@
-package com.utilitynest.rgbcalcpro
+package com.utilitynest.neoncalc
 
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList

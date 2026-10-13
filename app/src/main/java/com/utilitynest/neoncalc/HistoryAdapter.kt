@@ -1,4 +1,4 @@
-package com.utilitynest.rgbcalcpro
+package com.utilitynest.neoncalc
 
 import android.view.LayoutInflater
 import android.view.View

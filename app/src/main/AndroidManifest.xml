@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
-      RGB Calc Pro is 100% offline.
+      NeonCalc is 100% offline.
       Deliberately NO permissions are declared: no INTERNET, no storage,
       no phone state. This keeps the app fully compliant with Google Play
       data-safety and policy requirements out of the box.

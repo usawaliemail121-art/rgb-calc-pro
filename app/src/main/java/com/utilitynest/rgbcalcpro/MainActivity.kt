@@ -113,9 +113,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun appendToken(token: String) {
         if (token == ".") {
-            val lastNumber = input.substringAfterLast {
-                it == '+' || it == '-' || it == '\u00d7' || it == '\u00f7' || it == '(' || it == '%'
-            }
+            var i = input.length
+            while (i > 0 && (input[i - 1].isDigit() || input[i - 1] == '.')) i--
+            val lastNumber = input.substring(i)
             if (lastNumber.contains('.')) return
             if (lastNumber.isEmpty()) {
                 input.append("0.")
